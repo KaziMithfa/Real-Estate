@@ -4,11 +4,14 @@ import Root from "../layouts/Root";
 import Login from "../pages/Login";
 import UpdateProfile from "../pages/UpdateProfile";
 import Register from "../pages/Register";
+import EstateDetails from "../pages/EstateDetails/EstateDetails";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -27,6 +30,11 @@ const router = createBrowserRouter([
       {
         path: "/updateprofile",
         element: <UpdateProfile></UpdateProfile>,
+      },
+      {
+        path: "/estateDetails/:id",
+        element: <EstateDetails></EstateDetails>,
+        loader: () => fetch("/estates.json"),
       },
     ],
   },

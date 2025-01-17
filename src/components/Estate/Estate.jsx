@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Estate = () => {
   const [estates, setEstates] = useState([]);
@@ -56,7 +57,10 @@ const Estate = () => {
             </div>
 
             <div className="card-actions">
-              <button className="btn btn-primary">View Property</button>
+              <Link to={`/estateDetails/${estate.id}`}>
+                {" "}
+                <button className="btn btn-primary">View Property</button>
+              </Link>
             </div>
           </div>
         </div>
