@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const { LoginUser, signinwithGoogle, githubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -17,7 +18,14 @@ const Login = () => {
 
     LoginUser(email, password)
       .then((result) => {
-        navigate("/");
+        if (location?.state) {
+          navigate(location?.state);
+        } else {
+          navigate("/");
+          toast.success("logged in successfully");
+        }
+
+        // navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         const message = error.message;
@@ -29,24 +37,32 @@ const Login = () => {
     githubLogin()
       .then((result) => {
         const user = result.user;
-        navigate("/");
-        console.log(user);
+        if (location?.state) {
+          navigate(location?.state);
+        } else {
+          navigate("/");
+          toast.success("logged in successfully");
+        }
       })
       .catch((error) => {
         const errormessage = error.message;
-        console.log(errormessage);
+        toast.error(errormessage);
       });
   };
 
   const handleGoogleSignIn = () => {
     signinwithGoogle()
       .then((result) => {
-        toast.success("you have logged in successfully");
-        navigate("/");
+        if (location?.state) {
+          navigate(location?.state);
+        } else {
+          navigate("/");
+          toast.success("logged in successfully");
+        }
       })
       .catch((error) => {
         const message = error.message;
-        console.log(message);
+        toast.error(message);
       });
   };
 

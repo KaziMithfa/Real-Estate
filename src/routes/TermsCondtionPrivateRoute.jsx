@@ -1,8 +1,8 @@
-import { Children, useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateDetailsRoute = ({ children }) => {
+const TermsCondtionPrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
@@ -17,4 +17,4 @@ const PrivateDetailsRoute = ({ children }) => {
   return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
-export default PrivateDetailsRoute;
+export default TermsCondtionPrivateRoute;

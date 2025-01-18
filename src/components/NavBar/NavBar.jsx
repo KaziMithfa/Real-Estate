@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
-  const { logout, user } = useContext(AuthContext);
+  const { logout, user, loading } = useContext(AuthContext);
 
   const navLinks = (
     <>
@@ -16,7 +16,7 @@ const NavBar = () => {
       </li>
 
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/terms">Terms & Conditions</Link>
       </li>
     </>
   );
@@ -24,6 +24,9 @@ const NavBar = () => {
   const handleLogOut = () => {
     logout().then().catch();
   };
+
+  if (loading) {
+  }
 
   return (
     <div className="navbar bg-base-100 fixed z-10">
@@ -58,7 +61,9 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        {user ? (
+        {loading ? (
+          <span className="loading loading-spinner loading-lg"></span>
+        ) : user ? (
           <>
             <div
               tabIndex={0}
@@ -67,10 +72,7 @@ const NavBar = () => {
               data-tip={user.displayName}
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
               </div>
             </div>
             <button onClick={handleLogOut} className="btn sm:mr-2">

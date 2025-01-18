@@ -7,6 +7,8 @@ import Register from "../pages/Register";
 import EstateDetails from "../pages/EstateDetails/EstateDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateDetailsRoute from "./PrivateDetailsRoute";
+import TermsConditions from "../pages/TermsConditions/TermsConditions";
+import TermsCondtionPrivateRoute from "./TermsCondtionPrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,15 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+
+      {
+        path: "/terms",
+        element: (
+          <TermsCondtionPrivateRoute>
+            <TermsConditions></TermsConditions>
+          </TermsCondtionPrivateRoute>
+        ),
       },
 
       {

@@ -36,16 +36,14 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        updateUser(name, "https://example.com/jane-q-user/profile.jpg").then(
-          () => {
-            console.log(result);
-            const message =
-              "The user has created account successfully with the name and photo URL";
+        updateUser(name, photo).then(() => {
+          console.log(result);
+          const message =
+            "The user has created account successfully with the name and photo URL";
 
-            toast.success(message);
-            navigate("/login");
-          }
-        );
+          toast.success(message);
+          navigate("/login");
+        });
       })
       .catch((error) => {
         setError(error);
