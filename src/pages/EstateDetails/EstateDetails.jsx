@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 
 const EstateDetails = () => {
+  useEffect(() => {
+    document.title = "Details";
+  }, []);
+
   const { id } = useParams();
   const estates = useLoaderData();
   const Id = parseInt(id);

@@ -1,8 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const UpdateProfile = () => {
+  useEffect(() => {
+    document.title = "Update Profile";
+  }, []);
+
   const { user, updateUser } = useContext(AuthContext);
   const [name, setName] = useState(user.displayName);
   const [email, setEmail] = useState(user.email);

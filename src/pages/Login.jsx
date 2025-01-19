@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
   const { LoginUser, signinwithGoogle, githubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();

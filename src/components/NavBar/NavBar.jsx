@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const NavBar = () => {
@@ -8,21 +8,52 @@ const NavBar = () => {
   const navLinks = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-400 font-bold border-b-2 border-blue-400 pb-1"
+              : "hover:text-blue-400"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
 
       <li>
-        <Link to="/updateprofile">Update Profile</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-400 font-bold border-b-2 border-blue-400 pb-1"
+              : "hover:text-blue-400"
+          }
+          to="/updateprofile"
+        >
+          Update Profile
+        </NavLink>
       </li>
 
       <li>
-        <Link to="/terms">Terms & Conditions</Link>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-400 font-bold border-b-2 border-blue-400 pb-1"
+              : "hover:text-blue-400"
+          }
+          to="/terms"
+        >
+          Terms & Conditions
+        </NavLink>
       </li>
     </>
   );
 
   const handleLogOut = () => {
-    logout().then().catch();
+    logout()
+      .then(() => {
+        <Navigate to="/"></Navigate>;
+      })
+      .catch();
   };
 
   return (
@@ -65,7 +96,7 @@ const NavBar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost btn-circle avatar tooltip  tooltip-bottom "
+              className="btn btn-ghost btn-circle avatar tooltip  tooltip-bottom  "
               data-tip={user.displayName}
             >
               <div className="w-10 rounded-full">

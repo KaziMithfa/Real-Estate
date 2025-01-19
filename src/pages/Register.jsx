@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const Register = () => {
+  useEffect(() => {
+    document.title = "Register";
+  }, []);
+
   const { createUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
