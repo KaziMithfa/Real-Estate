@@ -1,11 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const UpdateProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, updateUser } = useContext(AuthContext);
+  const [name, setName] = useState(user.displayName);
+  const [email, setEmail] = useState(user.email);
+  const [image, setImage] = useState(user.photoURL);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateUser(name, image)
+      .then(() => {
+        const message = "The user has been successfully updated his profile";
+        toast.success(message);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
+
+  const handleNameChange = (e) => {
+    const nametxt = e.target.value;
+    setName(nametxt);
+  };
+
+  const handleImageChange = (e) => {
+    const imagetxt = e.target.value;
+    setImage(imagetxt);
+  };
 
   return (
-    <form className="card-body lg:w-1/2 md:w-3/4 mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="card-body lg:w-1/2 md:w-3/4 mx-auto"
+    >
       <div className="form-control">
         <label className="label">
           <span className="label-text">Email</span>
@@ -15,6 +44,7 @@ const UpdateProfile = () => {
           name="email"
           placeholder="email"
           className="input input-bordered"
+          value={email}
           required
         />
       </div>
@@ -28,6 +58,8 @@ const UpdateProfile = () => {
           name="name"
           placeholder="Name"
           className="input input-bordered"
+          onChange={handleNameChange}
+          value={name}
           required
         />
       </div>
@@ -38,10 +70,11 @@ const UpdateProfile = () => {
         </label>
         <input
           type="text"
-          name="image link"
+          name="image"
           placeholder="image link"
-          value={"https:kafkak@49.com"}
           className="input input-bordered"
+          onChange={handleImageChange}
+          value={image}
           required
         />
       </div>

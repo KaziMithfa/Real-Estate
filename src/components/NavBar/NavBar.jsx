@@ -25,9 +25,6 @@ const NavBar = () => {
     logout().then().catch();
   };
 
-  if (loading) {
-  }
-
   return (
     <div className="navbar bg-base-100 fixed z-10">
       <div className="navbar-start">

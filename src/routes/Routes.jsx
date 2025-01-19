@@ -9,6 +9,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateDetailsRoute from "./PrivateDetailsRoute";
 import TermsConditions from "../pages/TermsConditions/TermsConditions";
 import TermsCondtionPrivateRoute from "./TermsCondtionPrivateRoute";
+import UpdateProfileRoot from "./UpdateProfileRoot";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
 
       {
         path: "/updateprofile",
-        element: <UpdateProfile></UpdateProfile>,
+        element: (
+          <UpdateProfileRoot>
+            <UpdateProfile></UpdateProfile>
+          </UpdateProfileRoot>
+        ),
       },
       {
         path: "/estateDetails/:id",
