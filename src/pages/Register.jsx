@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { getAuth } from "firebase/auth";
+import app from "../firebase/firebase.config";
 
 const Register = () => {
   useEffect(() => {
@@ -40,13 +42,12 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        updateUser(name, photo).then(() => {
-          console.log(result);
+        updateUser(name, photo).then((result) => {
           const message =
             "The user has created account successfully with the name and photo URL";
 
           toast.success(message);
-          navigate("/login");
+          navigate("/");
         });
       })
       .catch((error) => {
